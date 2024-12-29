@@ -1,47 +1,16 @@
-import Link from "next/link";
-import React from "react";
-import FooterContactForm from "./FooterContactForm";
-import FooterLearn from "./FooterLearn";
-import SocialMedia from "./SocialMedia";
-import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className=" w-full bg-black  mt-12">
-      <section className="flex flex-col md:flex-row">
-        <FooterLearn />
-        <FooterContactForm />
-      </section>
-      <section className=" px-6 xs:px-8 sm:px-12  lg:px-16 xl:px-24 2xl:px-32 py-2 flex flex-col sm:flex-row justify-between items-center gap-2 ">
-
-      <div className="flex justify-center items-center gap-x-2 text-sm text-light">
-          <p className="">
-            Developed
-            <span>&nbsp;💖&nbsp;with&nbsp;</span>
-          </p>
-          <Link href={"https://nextjs.org/"} target="_blank">
-            <Image src="/nextjs.svg" alt="next.js 14" width={24} height={24} />
-          </Link>
-          <span className="text-light">&nbsp;&&nbsp;</span>
-          <Link href={"https://sanity.io/"} target="_blank">
-            <Image src="/sanity.svg" alt="sanity" width={24} height={24} />
-          </Link>
-        </div>
-      
-        <div>
-          <p className="text-xs text-light">
-            © 2024 <span className="text-light font-bold">&nbsp;DEV</span>
-            <span className="text-accentDarkPrimary font-bold">
-              LAB&nbsp;
-            </span>{" "}
-            All rights reserved.
-          </p>
-        </div>
-
-
-
-      </section>
-
-    </footer>
+    <div className="bg-[#3E2723] dark:bg-yellow-300 h-[450px] rounded-sm pt-24 mt-14">
+      <div className="w-[434px] h-[213px]  text-center m-auto  flex flex-col justify-center items-center">
+        <h1 className="font-serif font-bold text-6xl dark:text-black w-[730px] mr-[20px] text-[#ffffff]">Delicious Cakes Blog</h1>
+        <p className="dark:text-black text-[#ffffff] text-left leading-normal mt-10 p-6 text-2xl w-[850px]">
+        Discover the world of delightful cakes, baking tips,
+         and scrumptious recipes. Whether you are a beginner or a pro baker, 
+         our blog has everything you need to craft perfect cakes every time.
+          Join us in celebrating the art of baking!
+        </p>
+      </div>
+    </div>
   );
 }
