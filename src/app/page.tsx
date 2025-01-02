@@ -10,7 +10,7 @@ export default async function Home() {
 summary,title,image,"slug":slug.current
 }`;
 
-const posts:Post[] =await client.fetch(query)
+const posts:Post[]=await client.fetch(query)
 console.log(posts)
 
   return (

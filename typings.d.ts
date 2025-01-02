@@ -3,5 +3,5 @@ type Post = {
     summary : string,
     image : any,
     slug : string,
-
+    comments?: Array<Comment>;
 }

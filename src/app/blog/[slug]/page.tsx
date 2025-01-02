@@ -1,8 +1,11 @@
+import AddComment from "@/components/AddComment";
+import AllComments from "@/components/AllComments";
 import { components } from "@/components/customComponent";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
+
 
 export const revalidate=10 //seconds
 
@@ -16,20 +19,29 @@ console.log(slugRoutes);
 return slugRoutes.map((slug:string)=>({slug}))
 }
 
-
-export default async function page({params:{slug}}:{params:{slug:string}}) {
-  console.log("Slug value:", slug);
+export default async function page({params:{slug},searchParams}:{params:{slug:string};  searchParams: { [key: string]: string | string[] | undefined ; comments?: string}}) {
+ console.log("my Slug value:", slug);
+   const commentsOrder:string= searchParams?.comments || "desc";
+  
+  console.log("search params:", searchParams);
 
 const query =`*[_type=='post' && slug.current=="${slug}"]{
-  title,summary,image,content,
-    author->{bio,image,name}
+  _id,
+title,
+  summary,
+  image,
+  content,
+    author->{bio,image,name},
+     "comments": *[_type == "comment" && post._ref == ^._id ] | order(_createdAt ${commentsOrder}) {
+      name,
+      comment,
+      _createdAt,
+    }
   }[0]`;
  
  
 const post=await client.fetch(query)
-console.log(post)
-//  console.log(post.title)
-
+ console.log(post)
   return (
     <article className="mt-12 mb-24 px-2 2xl:px-12 flex flex-col gap-y-8">
 
@@ -77,15 +89,19 @@ console.log(post)
 
       {/* Main Body of Blog */}
       <section className="mt-[10px] text-lg leading-normal text-dark/80 dark:text-light/80
-      
+
       ">
-        {/* prose-h4:text-accentDarkPrimary prose-h4:text-3xl prose-h4:font-bold 
-      prose-li:list-disc prose-li:list-inside prose-li:marker:text-accentDarkSecondary
-      prose-strong:text-dark dark:prose-strong:text-white */}
+       
       <PortableText
       value={post.content} 
        components={components}
       />
+      <AddComment postId={post?._id}/>
+      <AllComments
+            comments={post?.comments || []}
+            slug={post?.slug?.current}
+            commentsOrder={commentsOrder.toString()}
+          />
       </section>
     </article>
   );

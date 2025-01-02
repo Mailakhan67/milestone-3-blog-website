@@ -15,7 +15,7 @@ export const post= defineType ({
             validation : Rule => Rule.required()
         
         }),
-/////Slug Field
+//Slug Field
 defineField({
     name : 'slug',
     type : 'slug',
@@ -61,33 +61,3 @@ defineField({
 }),
     ]
 })
-
-//////
-// defineField ({
-//     name : 'title',
-//     type : 'string',
-//     title : 'Post Title',
-//     description : 'Title of the Post ',
-    
-//     validation : Rule => Rule.required()
-//     //max(12).warning("This field is required")
-//     // required().error("This field is required")
-//     //.max(12).error("This field is required")  
-// }),
-
-
-
-///
-  // {
-        //     name : 'gender',
-        //     type : 'string',
-        //     title : 'Gender',
-        //     options :{
-        //   list : [
-        //     {title : 'Male' , value : 'male'},
-        //     {title : 'Female' , value : 'female'}
-        //   ],
-        //   layout : 'radio',
-        //   direction : 'horizontal'
-        //     }
-        // },
